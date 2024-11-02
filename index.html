@@ -3,31 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D Map Viewer</title>
-    <style> body { margin: 0; } </style>
+    <title>Ortofoto Georreferenciada</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <style>
+        #map { height: 100vh; }
+    </style>
 </head>
 <body>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three-gltf-loader@1.105.0/build/three-gltf-loader.js"></script>
+    <div id="map"></div>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script>
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        document.body.appendChild(renderer.domElement);
+        // Configura las coordenadas de las esquinas de la ortofoto georreferenciada
+        const bounds = [
+            [LATITUD_INFERIOR_IZQUIERDA, LONGITUD_INFERIOR_IZQUIERDA],
+            [LATITUD_SUPERIOR_DERECHA, LONGITUD_SUPERIOR_DERECHA]
+        ];
 
-        const loader = new THREE.GLTFLoader();
-        loader.load('model.gltf', function (gltf) {
-            scene.add(gltf.scene);
-            renderer.render(scene, camera);
-        });
+        // Inicializa el mapa
+        const map = L.map('map').setView([CENTRO_LATITUD, CENTRO_LONGITUD], ZOOM_INICIAL);
 
-        camera.position.z = 5;
-        function animate() {
-            requestAnimationFrame(animate);
-            renderer.render(scene, camera);
-        }
-        animate();
+        // Añade un fondo de mapa base (ejemplo: OpenStreetMap)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Añade la ortofoto como una imagen superpuesta
+        L.imageOverlay('ruta/a/tu-ortofoto.png', bounds).addTo(map);
+
+        // Ajusta el mapa a los límites de la imagen
+        map.fitBounds(bounds);
     </script>
 </body>
 </html>
