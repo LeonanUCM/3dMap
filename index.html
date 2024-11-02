@@ -22,7 +22,7 @@
 
 <script>
     // Inicializa el mapa centrado en Madrid (latitud, longitud) y nivel de zoom 13
-    var map = L.map('map').setView([-45.52261991124333, -20.686860055708348], 13);
+    var map = L.map('map').setView([-20.686860055708348, -45.52261991124333], 13);
 
     // Agrega una capa base de imágenes satelitales de Esri
     L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
@@ -31,7 +31,7 @@
     }).addTo(map);
 
     // Definir los límites de la imagen superpuesta [suroeste, noreste]
-    var imageBounds = [[-45.52645021200729, -20.68987551908376], [-45.52261991124333, -20.686860055708348]]; // Reemplaza estos valores con los límites de tu imagen
+    var imageBounds = [[-20.68987551908376, -45.52645021200729], [-20.686860055708348, -45.52261991124333]]; // Reemplaza estos valores con los límites de tu imagen
 
     // Agregar la imagen superpuesta (asegúrate de que 'output.png' sea el nombre correcto de tu imagen)
     L.imageOverlay('formiga.png', imageBounds).addTo(map);
