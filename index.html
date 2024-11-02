@@ -21,20 +21,20 @@
 <div id="map"></div>
 
 <script>
-    // Inicializa el mapa centrado en Madrid
+    // Inicializa el mapa centrado en Madrid (latitud, longitud) y nivel de zoom 13
     var map = L.map('map').setView([40.4168, -3.7038], 13);
 
-    // Agrega una capa base de imágenes de satélite de Esri
+    // Agrega una capa base de imágenes satelitales de Esri
     L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
         attribution: 'Tiles © Esri',
         maxZoom: 19
     }).addTo(map);
 
-    // Definir los límites de la imagen [suroeste, noreste]
-    var imageBounds = [[40.4, -3.72], [40.43, -3.68]];
+    // Definir los límites de la imagen superpuesta [suroeste, noreste]
+    var imageBounds = [[40.4, -3.72], [40.43, -3.68]]; // Reemplaza estos valores con los límites de tu imagen
 
-    // Agregar la imagen superpuesta
-    L.imageOverlay('output.png', imageBounds).addTo(map);
+    // Agregar la imagen superpuesta (asegúrate de que 'output.png' sea el nombre correcto de tu imagen)
+    //L.imageOverlay('output.png', imageBounds).addTo(map);
 </script>
 
 </body>
