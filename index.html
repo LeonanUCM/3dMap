@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Exibição de GeoTIFF</title>
+    <title>Mapa de Madrid con GeoTIFF</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Inclua o CSS do Leaflet -->
+    <!-- Incluye el CSS de Leaflet -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
-    <!-- Inclua o JavaScript do Leaflet -->
+    <!-- Incluye el JavaScript de Leaflet -->
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
     <style>
-        #map { height: 100vh; }
+        #map { height: 100vh; margin: 0; padding: 0; }
+        html, body { height: 100%; margin: 0; padding: 0; }
     </style>
 </head>
 <body>
@@ -20,19 +21,19 @@
 <div id="map"></div>
 
 <script>
-    // Inicializa o mapa
-    var map = L.map('map').setView([LATITUDE_CENTRAL, LONGITUDE_CENTRAL], ZOOM_INICIAL);
+    // Inicializa el mapa centrado en Madrid
+    var map = L.map('map').setView([40.4168, -3.7038], 13);
 
-    // Adiciona uma camada de base com imagens de satélite
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© OpenStreetMap contributors',
+    // Agrega una capa base de imágenes de satélite de Esri
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        attribution: 'Tiles © Esri',
         maxZoom: 19
     }).addTo(map);
 
-    // Defina os limites da imagem [sul-oeste, norte-leste]
-    var imageBounds = [[LAT_SUL, LNG_OESTE], [LAT_NORTE, LNG_LESTE]];
+    // Definir los límites de la imagen [suroeste, noreste]
+    var imageBounds = [[40.4, -3.72], [40.43, -3.68]];
 
-    // Adiciona a imagem como uma sobreposição
+    // Agregar la imagen superpuesta
     L.imageOverlay('output.png', imageBounds).addTo(map);
 </script>
 
