@@ -17,7 +17,7 @@
     <script src="geotiff.min.js"></script> <!-- Cambia esta ruta según tu estructura -->
 
     <script>
-        async function loadGeoTIFFOverlay() {
+        async function loadGeoTIFFOverlay() { 
             // Cargar el archivo GeoTIFF (asegúrate de que el archivo esté accesible y en la misma ruta)
             const response = await fetch('Mapa aereo 50cm.tif'); // Ajusta la ruta si es necesario
             const arrayBuffer = await response.arrayBuffer();
