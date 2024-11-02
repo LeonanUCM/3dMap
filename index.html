@@ -1,72 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
+    <title>Exibição de GeoTIFF</title>
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mapa con GeoTIFF</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+
+    <!-- Inclua o CSS do Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+    <!-- Inclua o JavaScript do Leaflet -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
     <style>
-        #map { height: 100vh; width: 100vw; }
+        #map { height: 100vh; }
     </style>
 </head>
-<body> 
-    <div id="map"></div>
+<body>
 
-    <!-- Scripts de Leaflet y la versión local de geotiff.js -->
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-    <script src="geotiff.min.js"></script> <!-- Cambia esta ruta según tu estructura -->
+<div id="map"></div>
 
-    <script>
-        async function loadGeoTIFFOverlay() { 
-            // Cargar el archivo GeoTIFF (asegúrate de que el archivo esté accesible y en la misma ruta)
-            const response = await fetch('Mapa aereo 50cm.tif'); // Ajusta la ruta si es necesario
-            const arrayBuffer = await response.arrayBuffer();
-            const tiff = await GeoTIFF.fromArrayBuffer(arrayBuffer);
-            const image = await tiff.getImage();
+<script>
+    // Inicializa o mapa
+    var map = L.map('map').setView([LATITUDE_CENTRAL, LONGITUDE_CENTRAL], ZOOM_INICIAL);
 
-            // Obtener las coordenadas georreferenciadas (bounding box)
-            const [xMin, yMax, xMax, yMin] = image.getBoundingBox();
-            const corners = [
-                [yMin, xMin], // Esquina Inferior Izquierda
-                [yMax, xMax]  // Esquina Superior Derecha
-            ];
+    // Adiciona uma camada de base com imagens de satélite
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors',
+        maxZoom: 19
+    }).addTo(map);
 
-            // Inicializar el mapa en el centro de la imagen
-            const map = L.map('map').setView([(yMin + yMax) / 2, (xMin + xMax) / 2], 13);
+    // Defina os limites da imagem [sul-oeste, norte-leste]
+    var imageBounds = [[LAT_SUL, LNG_OESTE], [LAT_NORTE, LNG_LESTE]];
 
-            // Agregar capa base de OpenStreetMap
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            }).addTo(map);
+    // Adiciona a imagem como uma sobreposição
+    L.imageOverlay('output.png', imageBounds).addTo(map);
+</script>
 
-            // Crear una URL de imagen de GeoTIFF utilizando canvas
-            const rasterData = await image.readRasters();
-            const width = image.getWidth();
-            const height = image.getHeight();
-            const canvas = document.createElement('canvas');
-            canvas.width = width;
-            canvas.height = height;
-            const ctx = canvas.getContext('2d');
-            const imgData = ctx.createImageData(width, height);
-
-            for (let i = 0; i < rasterData[0].length; i++) {
-                imgData.data[i * 4] = rasterData[0][i];       // Rojo
-                imgData.data[i * 4 + 1] = rasterData[1][i];   // Verde
-                imgData.data[i * 4 + 2] = rasterData[2][i];   // Azul
-                imgData.data[i * 4 + 3] = 255;                // Opacidad
-            }
-            ctx.putImageData(imgData, 0, 0);
-            const imageUrl = canvas.toDataURL();
-
-            // Agregar la imagen como superposición en el mapa
-            L.imageOverlay(imageUrl, corners).addTo(map);
-
-            // Ajustar el mapa a los límites de la imagen
-            map.fitBounds(corners);
-        }
-
-        // Cargar la superposición GeoTIFF
-        loadGeoTIFFOverlay();
-    </script>
 </body>
 </html>
