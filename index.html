@@ -6,24 +6,25 @@
     <title>Mapa con GeoTIFF</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <style>
-        #map { height: 100vh; }
+        #map { height: 100vh; width: 100vw; }
     </style>
 </head>
 <body>
     <div id="map"></div>
+
     <!-- Scripts de Leaflet y geotiff.js -->
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/geotiff@1.0.0-beta.6/dist/geotiff.min.js"></script>
 
     <script>
         async function loadGeoTIFFOverlay() {
-            // Cargar el archivo GeoTIFF (asegúrate de que el archivo esté accesible)
-            const response = await fetch('Mapa aereo 50cm.tif');
+            // Cargar el archivo GeoTIFF (asegúrate de que el archivo esté accesible y en la misma ruta)
+            const response = await fetch('Mapa aereo 50cm.tif'); // Ajusta la ruta si es necesario
             const arrayBuffer = await response.arrayBuffer();
             const tiff = await GeoTIFF.fromArrayBuffer(arrayBuffer);
             const image = await tiff.getImage();
 
-            // Obtener las coordenadas georreferenciadas
+            // Obtener las coordenadas georreferenciadas (bounding box)
             const [xMin, yMax, xMax, yMin] = image.getBoundingBox();
             const corners = [
                 [yMin, xMin], // Esquina Inferior Izquierda
