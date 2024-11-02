@@ -35,6 +35,9 @@
 
     // Agregar la imagen superpuesta (asegúrate de que 'output.png' sea el nombre correcto de tu imagen)
     L.imageOverlay('formiga.png', imageBounds).addTo(map);
+    
+    // Ajusta o mapa aos limites da imagem
+    map.fitBounds(imageBounds);
     console.log("formiga.png")
 </script>
 
