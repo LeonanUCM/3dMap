@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Mapa de Madrid con GeoTIFF</title>
+    <title>Mapa Condomínio Nova Zelândia em Minas Gerais.</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -26,14 +26,14 @@
 
     // Agrega una capa base de imágenes satelitales de Esri
     L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-        attribution: 'Tiles © Esri',
+        attribution: 'www.3top.es Tiles © Esri',
         maxZoom: 22
     }).addTo(map);
 
     // Definir los límites de la imagen superpuesta [suroeste, noreste]
     var imageBounds = [[-20.68987551908376, -45.52645021200729], [-20.686860055708348, -45.52261991124333]]; // Reemplaza estos valores con los límites de tu imagen
 
-    // Agregar la imagen superpuesta (asegúrate de que 'output.png' sea el nombre correcto de tu imagen)
+    // Agregar la imagen superpuesta 
     L.imageOverlay('formiga.png', imageBounds).addTo(map);
     
     // Ajusta o mapa aos limites da imagem
