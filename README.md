@@ -8,7 +8,7 @@ It utilizes basic HTML and JavaScript to create a responsive and interactive vie
 
 ## Demo
 
-[Click here to view the live demo](https://leonanucm.github.io/3dMap/)
+[Click here to view the live demo](https://leonanucm.github.io/Photogrametry-Web-Viewer)
 
 <br>
 <br>
