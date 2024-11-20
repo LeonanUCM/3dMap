@@ -14,29 +14,38 @@
     <style>
         #map { height: 100vh; margin: 0; padding: 0; }
         html, body { height: 100%; margin: 0; padding: 0; }
-        .fixed-link {
-            position: fixed;
-            top: 10px; 
-            right: 10px; 
-            background-color: rgba(255, 255, 255, 0.8); /* Fundo semi-transparente */
+        
+        /* Style for the link */
+        #kaggle-link {
+            position: absolute;
+            top: 10px; /* Adjust as needed */
+            left: 10px; /* Adjust as needed */
+            z-index: 1000; /* Ensures it stays on top */
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
             padding: 10px 15px;
             border-radius: 5px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-            z-index: 1000; /* Garante que fique sobreposto a outros elementos */
             text-decoration: none;
-            color: #333;
+            color: #000;
             font-weight: bold;
+            font-family: 'Montserrat', sans-serif; /* Apply Google Font */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        #kaggle-link:hover {
+            background-color: rgba(255, 255, 255, 1);
+            transform: translateY(-2px);
         }
 
-        .fixed-link:hover {
-            background-color: rgba(255, 255, 255, 1);
-            color: #000;
-        }        
+        /* Optional: Adjust the Leaflet control font if using the Leaflet control method */
+        .kaggle-link-control a {
+            font-family: 'Montserrat', sans-serif; /* Apply Google Font */
+        }      
     </style>
 </head>
 <body>
 
-<a href="https://www.kaggle.com/leonanvasconcelos/code" class="fixed-link" target="_blank">Leonan Vasconcelos</a>
+<a href="https://www.kaggle.com/leonanvasconcelos/code" id="kaggle-link" target="_blank">by Leonan Vasconcelos</a>
+    
 <div id="map"></div>
 
 <script>
