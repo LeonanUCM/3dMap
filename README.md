@@ -16,7 +16,13 @@ It utilizes basic HTML and JavaScript to create a responsive and interactive vie
 ## Other papers:
 
 [Object Detection with Pure Computer Vision Methods](https://github.com/LeonanUCM/ObjectDetectionPureCV)
+<br>
 [Coloring CCTV Images using a custom CNN](https://www.kaggle.com/code/leonanvasconcelos/coloring-cctv-images-using-cnn)
+<br>
 [Image Feature Extractor](https://www.kaggle.com/code/leonanvasconcelos/image-feature-extractor)
+<br>
 [Ranking Image Similarity](https://www.kaggle.com/leonanvasconcelos/ranking-image-similarity)
-[Image Tiling with Parallelization]([https://www.kaggle.com/leonanvasconcelos/image-tiling-with-parallelization)
+<br>
+[Image Tiling with Parallelization](https://www.kaggle.com/leonanvasconcelos/image-tiling-with-parallelization)
+<br>
+
